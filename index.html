@@ -1,0 +1,31 @@
+<div class="container mt-4">
+  <h3>Usuários</h3>
+  
+  <div class="row mb-3">
+    <div class="col-md-3">
+      <label for="statusFilter" class="form-label">Filtrar por status:</label>
+      <select id="statusFilter" class="form-select">
+        <option value="">Todos</option>
+        <option value="Ativo">Ativo</option>
+        <option value="Inativo">Inativo</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" id="btnFiltrar">Filtrar</button>
+
+  <div id="usersList" class="mt-4">
+    <!-- aqui será injetada a lista -->
+  </div>
+</div>
+
+<script>
+  document.getElementById("btnFiltrar").addEventListener("click", async () => {
+    const status = document.getElementById("statusFilter").value;
+
+    const response = await fetch(`/User/Filter?status=${status}`);
+    const html = await response.text();
+    
+    document.getElementById("usersList").innerHTML = html;
+  });
+</script>
